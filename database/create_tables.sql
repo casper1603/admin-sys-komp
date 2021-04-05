@@ -12,6 +12,15 @@ CREATE TABLE
 );
 
 CREATE TABLE
+    portfolio
+(
+    id            BIGINT  NOT NULL,
+    userName    VARCHAR NOT NULL,
+    details VARCHAR NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE
     hibernate_sequence
 (
     next_val BIGINT
