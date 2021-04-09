@@ -3,10 +3,7 @@ package agh.edu.pl.project.models.entities;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -18,29 +15,14 @@ public class Profile {
 
     private String details;
 
-    private String userName;
+    private String authUserName;
 
-    public long getId() {
-        return id;
+    @OneToOne
+    @JoinColumn(name = "userId")
+    private User user;
+
+    public Profile() {
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
-    public String getDetails() {
-        return details;
-    }
-
-    public void setDetails(String details) {
-        this.details = details;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 }

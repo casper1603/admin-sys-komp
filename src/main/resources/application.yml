@@ -23,3 +23,6 @@ spring:
         provider:
           keycloak-provider:
             issuer-uri: http://localhost:8081/auth/realms/AdminSys
+server:
+  error:
+    path: /error

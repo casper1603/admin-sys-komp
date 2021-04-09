@@ -1,5 +1,6 @@
 package agh.edu.pl.project.config;
 
+import agh.edu.pl.project.auth.ProfileGrantedAuthoritiesMapper;
 import agh.edu.pl.project.auth.ProfileOidcUserService;
 import agh.edu.pl.project.services.KeycloakLogoutHandler;
 import agh.edu.pl.project.services.Oauth2AuthenticationSuccessHandler;
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 
@@ -24,9 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // @formatter:off
         http
-                .logout().addLogoutHandler(logoutHandler)
+                .logout()
+                .addLogoutHandler(logoutHandler)
                 .and()
                 .oauth2Login()
                 .loginPage("/oauth2/authorization/admin-sys")
@@ -38,12 +40,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .mvcMatchers("/register", "/login", "/login-error",
                         "/login-verified").permitAll()
-                .mvcMatchers("/api/v1/users").hasRole("USER")
-                .mvcMatchers("/api/v1/profile").hasRole("USER")
-                .mvcMatchers("/support/**").hasAnyRole("USER", "ADMIN")
+                .mvcMatchers("/users").hasRole("ADMIN")
+                .mvcMatchers("/profile").hasAnyRole("USER", "ADMIN")
                 .mvcMatchers("/support/admin/**").access("isFullyAuthenticated() and hasRole('ADMIN')")
-                .mvcMatchers("/api/users/{username}/portfolio")
-                .access("@isPortfolioOwnerOrAdmin.check(#username)")
+                .mvcMatchers("/api/v1/users/{username}/profile")
+                .access("@isProfileOwnerOrAdmin.check(#username)")
                 .anyRequest().denyAll();
 
     }
@@ -56,6 +57,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public RedirectStrategy getRedirectStrategy() {
         return new DefaultRedirectStrategy();
+    }
+
+    @Bean
+    protected GrantedAuthoritiesMapper getGrantedAuthoritiesMapper() {
+        return new ProfileGrantedAuthoritiesMapper();
     }
 
 }

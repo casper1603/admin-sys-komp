@@ -31,10 +31,10 @@ public class Oauth2AuthenticationSuccessHandler implements AuthenticationSuccess
             user.setFirstName(principal.getFirstName());
             user.setLastName(principal.getLastName());
             user.setEmail(principal.getEmail());
-            this.userService.registerNewUser(user);
-            this.profileService.addProfileForUser(authentication.getName());
+            final var registeredUser = this.userService.registerNewUser(user);
+            this.profileService.addProfileForUser(registeredUser);
         }
         System.out.println("Authenticated! " + authentication.getName());
-        this.redirectStrategy.sendRedirect(request, response, "/api/v1/profile");
+        this.redirectStrategy.sendRedirect(request, response, "/profile");
     }
 }

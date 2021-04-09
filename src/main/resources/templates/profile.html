@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+</head>
+<body>
+<header th:insert="header :: header"></header>
+<div class="container">
+
+    <h3>Details</h3>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>UserId</th>
+            <th>User details</th>
+            <th>Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${profile.authUserName}">Name:</td>
+            <td th:text="${profile.details}">some details?</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

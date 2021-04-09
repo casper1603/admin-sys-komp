@@ -23,6 +23,5 @@ public class OidcProfileUser extends DefaultOidcUser implements ProfileAuthentic
     public String getEmail() {
         getFamilyName();
         return this.getAttributes().get("email").toString();
-
     }
 }

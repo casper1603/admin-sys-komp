@@ -4,7 +4,7 @@ import agh.edu.pl.project.models.entities.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
-    Profile findByUserName(String userName);
+    Profile findByAuthUserName(String authUserName);
 
-    boolean existsByUserName(String userName);
+    boolean existsByAuthUserName(String authUserName);
 }

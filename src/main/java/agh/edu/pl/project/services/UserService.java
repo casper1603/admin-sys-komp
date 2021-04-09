@@ -10,5 +10,5 @@ public interface UserService {
 
     UserView getOne(Long id);
 
-    void registerNewUser(User user);
+    User registerNewUser(User user);
 }
