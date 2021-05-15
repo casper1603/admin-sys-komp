@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements UserService {
+class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -30,5 +30,10 @@ public class UserServiceImpl implements UserService {
     public UserView getOne(Long id) {
         User entity = userRepository.getOne(id);
         return modelMapper.map(entity, UserView.class);
+    }
+
+    @Override
+    public User registerNewUser(User user) {
+        return userRepository.saveAndFlush(user);
     }
 }

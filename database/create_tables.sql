@@ -8,6 +8,18 @@ CREATE TABLE
     phone         VARCHAR,
     date_of_birth DATETIME,
     address       VARCHAR,
+
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE
+    profile
+(
+    id       BIGINT  NOT NULL,
+    authUserName VARCHAR NOT NULL,
+    details VARCHAR NULL,
+    userId BIGINT,
+    FOREIGN KEY(userId) REFERENCES user(id)
     PRIMARY KEY (id)
 );
 

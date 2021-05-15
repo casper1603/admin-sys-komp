@@ -1,0 +1,28 @@
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+  datasource:
+    url: jdbc:sqlite:database/my_db.db
+    driver-class-name: org.sqlite.JDBC
+  security:
+    oauth2:
+      client:
+        registration:
+          admin-sys:
+            client-id: agh-auth
+            client-secret: 4706d584-7f8d-46b7-93c2-e4db76b4fcbf
+            client-name: Agh auth
+            scope: openid
+            redirect-uri: http://localhost:8080/login/oauth2/code/agh-auth
+            client-authentication-method: basic
+            authorization-grant-type: authorization_code
+            provider: keycloak-provider
+        provider:
+          keycloak-provider:
+            issuer-uri: http://localhost:8081/auth/realms/AdminSys
+server:
+  error:
+    path: /error
