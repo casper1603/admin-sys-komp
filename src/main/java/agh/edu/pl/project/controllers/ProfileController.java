@@ -15,7 +15,9 @@ public class ProfileController {
     @GetMapping(value = "/profile")
     public ModelAndView getProfile() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("profile", profileService.getCurrentProfile());
+        final var currentProfile = profileService.getCurrentProfile();
+        modelAndView.addObject("profile", currentProfile);
+        modelAndView.addObject("user", currentProfile.getUser());
         return modelAndView;
     }
 }

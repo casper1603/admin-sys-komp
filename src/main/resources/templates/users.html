@@ -5,24 +5,20 @@
 <header th:insert="header :: header"></header>
 <div class="container">
 
-    <h3>Details</h3>
+    <h3>Users</h3>
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>UserId</th>
-            <th>User details</th>
-            <th>Email</th>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Email</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td th:text="${profile.authUserName}">?</td>
-            <td th:text="${profile.details}">?</td>
-            <td th:text="${user.email}">?</td>
+        <tr th:each="user : ${users}">
             <td th:text="${user.firstName}">?</td>
             <td th:text="${user.lastName}">?</td>
+            <td th:text="${user.email}">?</td>
         </tr>
         </tbody>
     </table>

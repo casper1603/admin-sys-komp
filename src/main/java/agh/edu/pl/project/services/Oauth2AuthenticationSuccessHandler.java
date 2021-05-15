@@ -25,7 +25,6 @@ public class Oauth2AuthenticationSuccessHandler implements AuthenticationSuccess
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException {
         if (!profileService.hasProfile(authentication.getName())) {
-            System.out.println("principal: " + authentication.getPrincipal().getClass());
             ProfileAuthenticatedPrincipal principal = (OidcProfileUser) authentication.getPrincipal();
             User user = new User();
             user.setFirstName(principal.getFirstName());
